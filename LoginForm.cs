@@ -12,6 +12,7 @@ namespace CognitoNetSample
 {
     public partial class LoginForm : Form
     {
+        Amazon.Extensions.CognitoAuthentication.CognitoUser cognitoUser = null;
         public LoginForm()
         {
             InitializeComponent();
@@ -33,14 +34,33 @@ namespace CognitoNetSample
             try
             {
                 CognitoHelper cognitoHelper = new CognitoHelper();
-                string result = await cognitoHelper.ValidateUser(txtusername.Text, txtpassword.Text);
-                Console.WriteLine(result);
+                cognitoUser = await cognitoHelper.ValidateUser(txtusername.Text, txtpassword.Text);
+                Console.WriteLine(cognitoUser.Username);
+                string bucketsforuser = await cognitoHelper.GetS3BucketsAsync(cognitoUser);
+                MessageBox.Show(bucketsforuser,"Buckets for the users");
+                
             }
             catch (Exception exp)
             {
                 Console.WriteLine(exp);
                 MessageBox.Show("Unable to validate the username and password");
             }
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            if (cognitoUser == null)
+            {
+                MessageBox.Show("Please login first");
+            }
+            else
+            {
+                await cognitoUser.ForgotPasswordAsync();
+                ForgotPassword forgotui = new ForgotPassword(cognitoUser);
+                forgotui.ShowDialog();
+
+            }
+
         }
     }
 }

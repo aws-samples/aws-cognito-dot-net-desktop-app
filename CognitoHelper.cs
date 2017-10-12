@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -82,7 +83,7 @@ public class CognitoHelper
         return true;
        
     }
-    internal async Task<string> ValidateUser(string username, string password) 
+    internal async Task<CognitoUser> ValidateUser(string username, string password) 
     {
         AmazonCognitoIdentityProviderClient provider =
                 new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
@@ -94,28 +95,39 @@ public class CognitoHelper
             Password = password
         };
 
+
         AuthFlowResponse authResponse = await user.StartWithSrpAuthAsync(authRequest).ConfigureAwait(false);
-        string accessToken = authResponse.AuthenticationResult.AccessToken;
-        return accessToken;
-    }
-
-
-    internal async Task<CognitoAWSCredentials>  GetCredentials(string idprovider, string id)
-    {
-        var provider = new AmazonCognitoIdentityProviderClient(new AnonymousAWSCredentials());
-        CognitoUserPool userPool = new CognitoUserPool(this.POOL_ID,this.CLIENTAPP_ID, provider);
-        CognitoUser user = new CognitoUser(id, this.CLIENTAPP_ID, userPool, provider);
-
-        string password = "userPassword";
-
-        AuthFlowResponse context = await user.StartWithSrpAuthAsync(new InitiateSrpAuthRequest()
+        if (authResponse.AuthenticationResult != null)
         {
-            Password = password
-        }).ConfigureAwait(false);
-
-        CognitoAWSCredentials credentials =
-            user.GetCognitoAWSCredentials("identityPoolID", new AppConfigAWSRegion().Region);
-
-        return credentials;
+            return user;
+        }
+        else
+        {
+            return null; 
+        }
     }
+
+
+   
+
+    public async Task<string> GetS3BucketsAsync(CognitoUser user)
+    {
+        CognitoAWSCredentials credentials =
+            user.GetCognitoAWSCredentials(FED_POOL_ID, new AppConfigAWSRegion().Region);
+        StringBuilder bucketlist = new StringBuilder();
+        using (var client = new AmazonS3Client(credentials))
+        {
+            ListBucketsResponse response =
+                await client.ListBucketsAsync(new ListBucketsRequest()).ConfigureAwait(false);
+
+            foreach (S3Bucket bucket in response.Buckets)
+            {
+                bucketlist.Append(bucket.BucketName);
+
+                bucketlist.Append("\n");
+            }
+        }
+        return bucketlist.ToString();
+    }
+
 }

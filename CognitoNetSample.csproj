@@ -106,6 +106,12 @@
       <DependentUpon>CodeEntry.cs</DependentUpon>
     </Compile>
     <Compile Include="CognitoHelper.cs" />
+    <Compile Include="ForgotPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.Designer.cs">
+      <DependentUpon>ForgotPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,9 @@
   <ItemGroup>
     <EmbeddedResource Include="CodeEntry.resx">
       <DependentUpon>CodeEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ForgotPassword.resx">
+      <DependentUpon>ForgotPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
