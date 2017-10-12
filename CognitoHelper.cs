@@ -83,10 +83,35 @@ public class CognitoHelper
         return true;
        
     }
+    internal async Task<CognitoUser> ResetPassword(string username)
+    {
+        AmazonCognitoIdentityProviderClient provider =
+               new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
+
+        CognitoUserPool userPool = new CognitoUserPool(this.POOL_ID, this.CLIENTAPP_ID, provider);
+
+        CognitoUser user = new CognitoUser(username, this.CLIENTAPP_ID, userPool, provider);
+        await user.ForgotPasswordAsync();
+        return user;
+    }
+
+    internal async Task<CognitoUser> UpdatePassword(string username, string code, string newpassword)
+    {
+        AmazonCognitoIdentityProviderClient provider =
+               new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
+
+        CognitoUserPool userPool = new CognitoUserPool(this.POOL_ID, this.CLIENTAPP_ID, provider);
+
+        CognitoUser user = new CognitoUser(username, this.CLIENTAPP_ID, userPool, provider);
+        await user.ConfirmForgotPasswordAsync(code,newpassword);
+        return user;
+    }
+
     internal async Task<CognitoUser> ValidateUser(string username, string password) 
     {
         AmazonCognitoIdentityProviderClient provider =
                 new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
+        
         CognitoUserPool userPool = new CognitoUserPool(this.POOL_ID, this.CLIENTAPP_ID, provider);
         
         CognitoUser user = new CognitoUser(username, this.CLIENTAPP_ID, userPool, provider);

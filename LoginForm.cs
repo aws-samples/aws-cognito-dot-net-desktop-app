@@ -49,18 +49,12 @@ namespace CognitoNetSample
 
         private async void button3_Click(object sender, EventArgs e)
         {
-            if (cognitoUser == null)
-            {
-                MessageBox.Show("Please login first");
-            }
-            else
-            {
-                await cognitoUser.ForgotPasswordAsync();
-                ForgotPassword forgotui = new ForgotPassword(cognitoUser);
-                forgotui.ShowDialog();
+        
 
-            }
+             ForgotPassword forgotui = new ForgotPassword();
+             forgotui.ShowDialog();
 
+          
         }
     }
 }

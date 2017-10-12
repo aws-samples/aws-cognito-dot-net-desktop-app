@@ -12,12 +12,11 @@ namespace CognitoNetSample
 {
     public partial class ForgotPassword : Form
     {
-        CognitoUser user;
-        public ForgotPassword(CognitoUser cognitoUser)
+       
+        public ForgotPassword()
         {
             InitializeComponent();
-            this.user = cognitoUser;
-            this.lblusername.Text = cognitoUser.Username;
+           
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -29,9 +28,15 @@ namespace CognitoNetSample
         {
             try
             {
-                await user.ConfirmForgotPasswordAsync(txtcode.Text, txtnewpassword.Text);
-                MessageBox.Show("Successfully changed the password");
-                this.Hide();
+                CognitoHelper helper = new CognitoHelper();
+                await helper.ResetPassword(txtusername.Text);
+                MessageBox.Show("Password reset request submitted. Please check the code on phone");
+                lblcode.Enabled = true;
+                txtcode.Enabled = true;
+                lblnewpassword.Enabled = true;
+                txtnewpassword.Enabled = true;
+                btnupdatepass.Enabled = true;
+               
             }
             catch (Exception exp)
             {
@@ -40,6 +45,21 @@ namespace CognitoNetSample
 
             }
             
+        }
+
+        private async void btnupdatepass_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CognitoHelper helper = new CognitoHelper();
+                await helper.UpdatePassword(txtusername.Text,txtcode.Text,txtnewpassword.Text);
+                MessageBox.Show("Password updated.");
+            }
+            catch (Exception exp)
+            {
+
+                MessageBox.Show("Unable to update the password"+ exp.Message);
+            }
         }
     }
 }

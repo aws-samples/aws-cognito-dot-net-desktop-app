@@ -30,11 +30,13 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.lblusername = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblnewpassword = new System.Windows.Forms.Label();
             this.txtnewpassword = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblcode = new System.Windows.Forms.Label();
             this.txtcode = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnforgotpass = new System.Windows.Forms.Button();
+            this.txtusername = new System.Windows.Forms.TextBox();
+            this.btnupdatepass = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -50,66 +52,89 @@
             // lblusername
             // 
             this.lblusername.AutoSize = true;
-            this.lblusername.Location = new System.Drawing.Point(144, 57);
+            this.lblusername.Location = new System.Drawing.Point(200, 57);
             this.lblusername.Name = "lblusername";
-            this.lblusername.Size = new System.Drawing.Size(35, 13);
+            this.lblusername.Size = new System.Drawing.Size(0, 13);
             this.lblusername.TabIndex = 1;
-            this.lblusername.Text = "label2";
             // 
-            // label2
+            // lblnewpassword
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "New Password";
+            this.lblnewpassword.AutoSize = true;
+            this.lblnewpassword.Enabled = false;
+            this.lblnewpassword.Location = new System.Drawing.Point(38, 153);
+            this.lblnewpassword.Name = "lblnewpassword";
+            this.lblnewpassword.Size = new System.Drawing.Size(78, 13);
+            this.lblnewpassword.TabIndex = 2;
+            this.lblnewpassword.Text = "New Password";
             // 
             // txtnewpassword
             // 
-            this.txtnewpassword.Location = new System.Drawing.Point(147, 98);
+            this.txtnewpassword.Enabled = false;
+            this.txtnewpassword.Location = new System.Drawing.Point(203, 153);
             this.txtnewpassword.Name = "txtnewpassword";
             this.txtnewpassword.PasswordChar = '*';
             this.txtnewpassword.Size = new System.Drawing.Size(100, 20);
             this.txtnewpassword.TabIndex = 3;
             // 
-            // label3
+            // lblcode
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 147);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Code";
+            this.lblcode.AutoSize = true;
+            this.lblcode.Enabled = false;
+            this.lblcode.Location = new System.Drawing.Point(38, 104);
+            this.lblcode.Name = "lblcode";
+            this.lblcode.Size = new System.Drawing.Size(32, 13);
+            this.lblcode.TabIndex = 4;
+            this.lblcode.Text = "Code";
             // 
             // txtcode
             // 
-            this.txtcode.Location = new System.Drawing.Point(147, 147);
+            this.txtcode.Enabled = false;
+            this.txtcode.Location = new System.Drawing.Point(203, 104);
             this.txtcode.Name = "txtcode";
             this.txtcode.PasswordChar = '*';
             this.txtcode.Size = new System.Drawing.Size(100, 20);
             this.txtcode.TabIndex = 5;
             // 
-            // button1
+            // btnforgotpass
             // 
-            this.button1.Location = new System.Drawing.Point(80, 195);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Update Password";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnforgotpass.Location = new System.Drawing.Point(32, 209);
+            this.btnforgotpass.Name = "btnforgotpass";
+            this.btnforgotpass.Size = new System.Drawing.Size(110, 23);
+            this.btnforgotpass.TabIndex = 6;
+            this.btnforgotpass.Text = "Forgot Password";
+            this.btnforgotpass.UseVisualStyleBackColor = true;
+            this.btnforgotpass.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtusername
+            // 
+            this.txtusername.Location = new System.Drawing.Point(203, 57);
+            this.txtusername.Name = "txtusername";
+            this.txtusername.Size = new System.Drawing.Size(100, 20);
+            this.txtusername.TabIndex = 7;
+            // 
+            // btnupdatepass
+            // 
+            this.btnupdatepass.Enabled = false;
+            this.btnupdatepass.Location = new System.Drawing.Point(203, 209);
+            this.btnupdatepass.Name = "btnupdatepass";
+            this.btnupdatepass.Size = new System.Drawing.Size(100, 23);
+            this.btnupdatepass.TabIndex = 8;
+            this.btnupdatepass.Text = "Update Password";
+            this.btnupdatepass.UseVisualStyleBackColor = true;
+            this.btnupdatepass.Click += new System.EventHandler(this.btnupdatepass_Click);
             // 
             // ForgotPassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(372, 260);
+            this.Controls.Add(this.btnupdatepass);
+            this.Controls.Add(this.txtusername);
+            this.Controls.Add(this.btnforgotpass);
             this.Controls.Add(this.txtcode);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblcode);
             this.Controls.Add(this.txtnewpassword);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblnewpassword);
             this.Controls.Add(this.lblusername);
             this.Controls.Add(this.label1);
             this.Name = "ForgotPassword";
@@ -123,10 +148,12 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblusername;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblnewpassword;
         private System.Windows.Forms.TextBox txtnewpassword;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblcode;
         private System.Windows.Forms.TextBox txtcode;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnforgotpass;
+        private System.Windows.Forms.TextBox txtusername;
+        private System.Windows.Forms.Button btnupdatepass;
     }
 }
