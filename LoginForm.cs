@@ -56,5 +56,12 @@ namespace CognitoNetSample
 
           
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CognitoHelper cognitoHelper = new CognitoHelper();
+
+            System.Diagnostics.Process.Start(cognitoHelper.GetCustomHostedURL());
+        }
     }
 }
