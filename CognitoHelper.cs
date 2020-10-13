@@ -35,8 +35,8 @@ public class CognitoHelper
 
     internal async Task<bool> SignUpUser(string username, string password, string email, string phonenumber)
     {
-        AmazonCognitoIdentityProviderClient provider =
-               new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
+        Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient provider =
+                new Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
        
         SignUpRequest signUpRequest = new SignUpRequest();
 
@@ -72,8 +72,8 @@ public class CognitoHelper
     }
     internal async Task<bool> VerifyAccessCode(string username, string code)
     {
-        AmazonCognitoIdentityProviderClient provider =
-               new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
+        Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient provider =
+                new Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
         ConfirmSignUpRequest confirmSignUpRequest = new ConfirmSignUpRequest();
         confirmSignUpRequest.Username = username;
         confirmSignUpRequest.ConfirmationCode=code;
@@ -94,8 +94,8 @@ public class CognitoHelper
     }
     internal async Task<CognitoUser> ResetPassword(string username)
     {
-        AmazonCognitoIdentityProviderClient provider =
-               new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
+        AAmazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient provider =
+                new Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
 
         CognitoUserPool userPool = new CognitoUserPool(this.POOL_ID, this.CLIENTAPP_ID, provider);
 
@@ -106,8 +106,8 @@ public class CognitoHelper
 
     internal async Task<CognitoUser> UpdatePassword(string username, string code, string newpassword)
     {
-        AmazonCognitoIdentityProviderClient provider =
-               new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
+        Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient provider =
+                new Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
 
         CognitoUserPool userPool = new CognitoUserPool(this.POOL_ID, this.CLIENTAPP_ID, provider);
 
@@ -118,8 +118,8 @@ public class CognitoHelper
 
     internal async Task<CognitoUser> ValidateUser(string username, string password) 
     {
-        AmazonCognitoIdentityProviderClient provider =
-                new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
+        Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient provider =
+                new Amazon.CognitoIdentityProvider.AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials());
         
         CognitoUserPool userPool = new CognitoUserPool(this.POOL_ID, this.CLIENTAPP_ID, provider);
         
